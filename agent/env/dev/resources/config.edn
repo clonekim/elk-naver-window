@@ -1,0 +1,6 @@
+{:dev true
+ :app-version "0.0.1"
+ :port 8000
+ :nrepl-port 7000
+ :max-body 104857600
+}
