@@ -28,7 +28,7 @@ clojure로 작성 되었지만 빌드결과물(fatjar)이 build 디렉토리에 
  2. [스크랩과 동시에 로그파일에 상품정보를 출력한다.](agent-log.md)
 
 
-> 실행방법 
+> 실행방법  
  아래와 같이 실행 후 브라우저로 http://localhost:8000에 접속한다   
 ```
  java -jar agent.jar
