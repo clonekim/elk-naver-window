@@ -2,6 +2,9 @@
 
  이전 업무에서 적용한 ELK를 간단히 재구성한 것입니다.
 
+## 가이드
+
+[가이드북-한글](https://esbook.kimjmin.net/)
 
 ## ELK Install
 
@@ -17,7 +20,7 @@
 
 ![](/images/naver-window.png)
 
-* page, pageSize 를 파라미터로 사용한다  
+* [page, pageSize, menuId 를 파라미터로 사용한다](request)  
 * agent가 스크랩하는 상품정보는 로그로 남긴다  
 * log format은 JSON 형식
 
