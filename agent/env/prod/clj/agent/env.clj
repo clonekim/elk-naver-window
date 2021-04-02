@@ -1,11 +1,10 @@
-(ns agent.env
-  (:require [clojure.tools.logging :as log]))
+(ns agent.env)
 
 (def defaults
   {:init
    (fn []
-     (log/info "[server started successfully]"))
+     (println "[server started successfully]"))
    :stop
    (fn []
-     (log/info "[server has shut down successfully]"))
+     (println "[server has shut down successfully]"))
    :middleware identity})
