@@ -17,13 +17,13 @@
   <appender name="JSON" class="ch.qos.logback.classic.sift.SiftingAppender">
 
     <discriminator>
-      <key>filename</key>
-      <defaultValue>debug</defaultValue>
+      <key>service</key>
+      <defaultValue>main</defaultValue>
     </discriminator>
 
     <sift>
-      <appender name="MDC-${filename}" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${filename}.log</file>
+      <appender name="MDC-${service}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${service}.log</file>
 
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
           <layout class="cambium.logback.json.FlatJsonLayout">
@@ -37,7 +37,7 @@
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-          <fileNamePattern>${filename}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+          <fileNamePattern>${service}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
           <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
             <maxFileSize>50MB</maxFileSize>
           </timeBasedFileNamingAndTriggeringPolicy>
@@ -59,7 +59,12 @@
 
 ```
 
+
+
 # 출력 결과
+
+agent의 소스를 보면 naver api에서 얻는 정보 중 아래와 같이 필요한 정보만 취한다.
+
 
 ```json
 {
