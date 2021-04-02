@@ -28,3 +28,28 @@
 ## Logstash
 
 Input에서 해당 파일을 감시한다.
+
+```
+input {
+  file {
+    path  => "/agent/log/logstash.log"
+      start_position => "beginning"
+      stat_interval => 1
+      codec => "json"
+  }
+}
+
+filter {
+  mutate {
+    remove_field => ["host", "path", "level", "filename", "logger", "timestamp", "images"]
+  }
+
+}
+
+output {
+  elasticsearch {
+    hosts => ["127.0.0.1:9200"]
+      index => "naver-window-top-%{+YYYY.MM.dd}"
+  }
+}
+```
