@@ -1,6 +1,7 @@
 (ns agent.handler
   (:require [clojure.tools.logging :as log]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+            [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-params wrap-json-response]]
             [ring.middleware.cookies :refer [wrap-cookies]]
             [ring.middleware.keyword-params :refer [wrap-keyword-params]]
@@ -42,6 +43,7 @@
       (wrap-cookies {:path "/"})
       (wrap-keyword-params)
       (wrap-json-params)
+      (wrap-resource "public")
       (wrap-defaults
        (-> site-defaults
            (assoc-in [:security :anti-forgery] false)))
@@ -52,8 +54,8 @@
 
 (def default-routes
   (routes
-   #'public-routes
    #'api-routes
+   #'public-routes
    (route/not-found "404")))
 
 

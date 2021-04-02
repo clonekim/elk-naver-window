@@ -5,7 +5,8 @@
             [slingshot.slingshot :refer [throw+ try+]]
             [org.httpkit.server :refer [send! with-channel on-close on-receive]]
             [agent.wsocket :refer [process-handler]]
-            [agent.command :refer [collect!]]))
+            [agent.command :refer [collect!]]
+            [agent.util :as util]))
 
 
 
@@ -14,13 +15,22 @@
 
 
 (defroutes public-routes
-  (GET "/" [] (index-page)))
+  (GET "/*" []
+    {:status 200
+     :headers {"Content-Type" "text/html"}
+     :body (slurp (clojure.java.io/resource "public/index.html"))}))
 
 
 (defroutes api-routes
   (GET "/socket" [] process-handler)
-  (POST "/trigger" [command buffer maxitem]
+  (POST "/trigger" [command buffer maxitem menuid]
     (case command
-      "collect" (do
-                  (collect! {:buffer buffer :maxitem maxitem})
-                  (ok)))))
+      "collect"
+      (do
+        (collect!
+         {:buffer (util/parse-int buffer)
+          :maxitem (util/parse-int maxitem)
+          :menuid menuid})
+        (ok))
+
+      (bad-request {:message "Command not found"}))))
