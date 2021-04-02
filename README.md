@@ -53,7 +53,6 @@ path에 agent의 로그가 출력하는 경로를 적어준다
 output 에 로그가 최종적으로 전송될 위치, 엘라스틱 서버를 지정한다.  
 이제 agent에서 상품을 스크랩핑 해보자  
 그러면 엘라스틱서치 에게 'naver-window-top-날짜' 라는 인덱스로 형성이 된다.  
-
 filter의 역할은 [agent가 생성하는 로그 중](agent-log.md)에서 필요없는 필드를 제외시킨다  
 
 *naver.conf*
