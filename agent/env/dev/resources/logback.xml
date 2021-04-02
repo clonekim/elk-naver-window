@@ -6,7 +6,6 @@
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <charset>UTF-8</charset>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} | %-20thread | %highlight(%-5level) | %-40logger{36} | %msg %n</pattern>
     </encoder>
   </appender>
 
@@ -14,13 +13,12 @@
   <appender name="JSON" class="ch.qos.logback.classic.sift.SiftingAppender">
 
     <discriminator>
-      <key>filename</key>
-      <defaultValue>debug</defaultValue>
+      <key>service</key>
+      <defaultValue>main</defaultValue>
     </discriminator>
 
     <sift>
-      <appender name="MDC-${filename}" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${filename}.log</file>
+      <appender name="MDC-${service}" class="ch.qos.logback.core.ConsoleAppender">
 
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
           <layout class="cambium.logback.json.FlatJsonLayout">
@@ -33,13 +31,6 @@
           </layout>
         </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-          <fileNamePattern>${filename}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-          <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-            <maxFileSize>50MB</maxFileSize>
-          </timeBasedFileNamingAndTriggeringPolicy>
-          <maxHistory>30</maxHistory>
-        </rollingPolicy>
       </appender>
     </sift>
   </appender>
