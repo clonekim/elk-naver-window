@@ -59,7 +59,6 @@
 
 (defn replace-products [coll]
   (mapv #(assoc {}
-                :zzim (:zzim %)
                 :product_no (:productNo %)
                 :product_code (:_id %)
                 :store_id (-> % :channel :_id)
