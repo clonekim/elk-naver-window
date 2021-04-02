@@ -1,5 +1,11 @@
 
+아래의 URI를 이용해서 page, pageSize, menuId를 넘겨서 해당 상품정보를 가져온다  
+
+```
 https://shopping.naver.com/v1/products?_nc_=1617289200000&subVertical=STYLE&page=1&pageSize=1&sort=RECENT&filter=ALL&displayType=CATEGORY_HOME&includeZzim=true&includeViewCount=true&includeStoreCardInfo=true&includeStockQuantity=false&includeBrandInfo=false&includeBrandLogoImage=false&includeRepresentativeReview=false&includeListCardAttribute=false&includeRanking=false&includeRankingByMenus=false&includeStoreCategoryName=false&includeIngredient=false&menuId=10000531&standardSizeKeys[]=&standardColorKeys[]=&attributeValueIds[]=&attributeValueIdsAll[]=&certifications[]=&filterTodayDelivery=false&menuIds[]=&includeStoreInfoWithHighRatingReview=false
+```
+
+해당 주소를 curl이나 기타 RESTful 툴로 호출 하면 아래와 같은 결과를 볼 수 있다  
 
 ```json
 {
