@@ -6,45 +6,57 @@
 
 [가이드북-한글](https://esbook.kimjmin.net/)
 
-## ELK Install
+## 스택 구성
 
+![](/images/elk-map.png)
+
+사전에 아래와 같이 ELK Stack의 구성요소를 설치한다  
 1. Elasticsearch
 1. Kibana 
 1. Logstash
 
+1,2 번은 설치 후 각각 서버를 시작한다  
 
 ## Agent
 
-에이젼트는 네이버 쇼핑 윈도우에서 최상 Top 100건의 데이터를  
-스크랩한다.
+해당 에이젼트 프로그램은 agent에 소스가 있고 빌드 결과물(fatjar)는 build 디렉토리에 존재한다.
 
-![](/images/naver-window.png)
-
-* [page, pageSize, menuId 를 파라미터로 사용한다](request.md)  
-* [agent가 스크랩하는 상품정보는 로그로 남긴다](agent-log.md)  
-* log format은 JSON 형식
+> 에이젼트가 하는 일은 다음과 같이 아주 단순하다.    
+ 1. [에이젼트는 네이버 쇼핑 윈도우에서 최상 Top 100건의 데이터를 스크랩한다.](request.md)
+ 2. [스크랩과 동시에 로그파일에 상품정보를 출력한다.](agent-log.md)
 
 
-![](/images/elk-map.png)
-
-build 디렉토리에 jar파일을 내려받아서 실행 할 수 있다.
-
+> 실행방법 
+ 아래와 같이 실행 후 브라우저로 http://localhost:8000에 접속한다   
 ```
  java -jar agent.jar
 ```
-실행 http://localhost:8080 으로 접속하면 프론트 화면을 볼 수 있다.
-![](/images/front.png)
+![프론트 화면](/images/front.png)
 
-[스크랩핑을 실행 후 바로화면에서 확인을 할 수가 있겠다](/images/example.png)
+buffer에 10을 입력 후 maxitem에 100을 입력 후 Menu ID를 여성을 고르자  
+페이지당 10개 씩 총 100개의 상품을 스크랩한다
+
+> 로그위치  
+
+```
+agent를 실행한 위치에 logstash.log가 생성된다
+```
+
+
 
 ## Logstash
 
-Input에서 해당 파일을 감시한다.
+아래와 같이 naver.conf 파일을 작성 한다.  
+path에 agent의 로그가 출력하는 경로를 적어준다  
+output 에 로그가 최종적으로 전송될 위치, 엘라스틱 서버를 지정한다.  
+이제 agent에서 상품을 스크랩핑 해보자  
+그러면 엘라스틱서치 에게 'naver-window-top-날짜' 라는 인덱스로 형성이 된다.  
 
+*naver.conf*
 ```
 input {
   file {
-    path  => "/agent/log/logstash.log"
+    path  => "/agent/logstash.log"
       start_position => "beginning"
       stat_interval => 1
       codec => "json"
@@ -66,20 +78,29 @@ output {
 }
 ```
 
+> 실행
+```
+logstash -f naver.conf
+```
+
 ## Kibana
 
-http://localhost:5601 로 접속
+키바나에 접속하여 저장된 데이터로 시각화 작업을 해보자  
+http://localhost:5601 로 접속한다.
 
 
-* Visualize Library 로 가서 간단힌 heatmap를 표현해보자
+> Visualize Library 로 가서 간단힌 heatmap를 표현해보자
+
 ![](/images/visual-step1.png)
-* Buckets  Add 클릭 후
-* X-axis 에는 업체명 을 선택  
-* Y-axis 에는 네이버 카테고리를 선택
- ![](/images/bucket-add.png)
+
+1. Buckets  Add 클릭 후
+2. X-axis 에는 업체명 을 선택  
+3. Y-axis 에는 네이버 카테고리를 선택
+
+![](/images/bucket-add.png)
 
 ![결과](/images/heatmap.png)
 
-네이버 카테고리를 태그클라우드로 보자
+> 네이버 카테고리를 태그클라우드로 보자
 
 ![](/images/tag-cloud.png)
