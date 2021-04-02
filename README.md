@@ -59,9 +59,10 @@ output {
 http://localhost:5601 로 접속
 
 * Visualize Library 로 가서 간단힌 heatmap를 표현해보자
-* ![](/images/visual-step1.png)
+![](/images/visual-step1.png)
 * Buckets  Add 클릭 후
 * X-axis 에는 업체명 을 선택  
 * Y-axis 에는 네이버 카테고리를 선택
-* ![](/images/bucket-add.png)
+ ![](/images/bucket-add.png)
 
+![결과](/images/heatmap.png)
