@@ -27,6 +27,15 @@
 
 ![](/images/elk-map.png)
 
+build 디렉토리에 jar파일을 내려받아서 실행 할 수 있다.
+
+```
+ java -jar agent.jar
+```
+실행 http://localhost:8080으로 접속하면 프론트 화면을 볼 수 있다.
+![](/images/front.png)
+
+[스크랩핑을 실행 후 바로화면에서 확인을 할 수가 있겠다](/images/example.png)
 
 ## Logstash
 
