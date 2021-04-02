@@ -58,6 +58,7 @@ output {
 
 http://localhost:5601 로 접속
 
+
 * Visualize Library 로 가서 간단힌 heatmap를 표현해보자
 ![](/images/visual-step1.png)
 * Buckets  Add 클릭 후
@@ -66,3 +67,7 @@ http://localhost:5601 로 접속
  ![](/images/bucket-add.png)
 
 ![결과](/images/heatmap.png)
+
+네이버 카테고리를 태그클라우드로 보자
+
+![](/images/tag-cloud.png)
