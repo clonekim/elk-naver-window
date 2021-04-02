@@ -20,8 +20,8 @@
 
 ![](/images/naver-window.png)
 
-* [page, pageSize, menuId 를 파라미터로 사용한다](request)  
-* agent가 스크랩하는 상품정보는 로그로 남긴다  
+* [page, pageSize, menuId 를 파라미터로 사용한다](request.md)  
+* [agent가 스크랩하는 상품정보는 로그로 남긴다](agent-log.md)  
 * log format은 JSON 형식
 
 
