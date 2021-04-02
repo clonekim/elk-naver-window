@@ -105,7 +105,7 @@ aggregation based를 선택한다
 
 ![결과](/images/heatmap.png)
 
-> 네이버 카테고리를 태그클라우드로 보자
+> 네이버 카테고리를 태그클라우드로 보자  
 aggregation based에서 선택한다  
 
 
