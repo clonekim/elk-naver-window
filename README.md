@@ -92,18 +92,21 @@ logstash -f naver.conf
 http://localhost:5601 로 접속한다.
 
 
-> Visualize Library 로 가서 간단힌 heatmap를 표현해보자
+> Visualize Library 로 가서 간단한 heatmap를 표현해보자  
+aggregation based를 선택한다  
 
 ![](/images/visual-step1.png)
 
 1. Buckets  Add 클릭 후
-2. X-axis 에는 업체명 을 선택  
-3. Y-axis 에는 네이버 카테고리를 선택
+2. X-axis 에는 업체명 (channel_name.keyword) 을 선택  
+3. Y-axis 에는 네이버 카테고리 (naver_category.keyword)를 선택
 
 ![](/images/bucket-add.png)
 
 ![결과](/images/heatmap.png)
 
 > 네이버 카테고리를 태그클라우드로 보자
+aggregation based에서 선택한다  
+
 
 ![](/images/tag-cloud.png)
