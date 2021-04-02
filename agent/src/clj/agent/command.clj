@@ -39,7 +39,7 @@
 
     (async/go-loop []
       (let [c (async/<! ch)]
-        (with-raw-mdc {"filename" "logstash"}
+        (with-raw-mdc {"service" "logstash"}
           (doseq [item (replace-products c)]
             (notify-clients (generate-string {:data item}))
             (log/info item "stored!")))
