@@ -68,7 +68,7 @@ input {
 
 filter {
   mutate {
-    remove_field => ["host", "path", "level", "filename", "logger", "timestamp", "images"]
+    remove_field => ["host", "path", "level", "filename", "logger", "timestamp", "images", "message"]
   }
 
 }
