@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.12.0
+    platform: linux/amd64
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - node.name=elastic
+      - cluster.name=mycluster
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - 'data:/usr/share/elasticsearch/data'
+    networks:
+      - elk
+  logstash:
+    container_name: logstash
+    image: logstash:7.12.0
+    volumes:
+      - ./pipeline:/usr/share/logstash/pipeline
+      - .:/agent
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+  kibana:
+    container_name: kibana
+    image: kibana:7.12.0
+    platform: linux/amd64
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+
+networks:
+  elk:
+    external: true
+
+volumes:
+  data:
+    driver: local
